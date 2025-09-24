@@ -1,0 +1,44 @@
+// This file is a heavily cut-down version of the original at
+// https://github.com/googleapis/googleapis/blob/master/google/cloud/translate/v3/translation_service.proto
+
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.cloud.translation.v3;
+
+service TranslationService {
+  rpc TranslateText(TranslateTextRequest) returns (TranslateTextResponse) {}
+}
+
+message TranslateTextRequest {
+  repeated string contents = 1;
+  string mime_type = 3;
+  string source_language_code = 4 ;
+  string target_language_code = 5;
+  string parent = 8;
+  string model = 6;
+  map<string, string> labels = 10;
+}
+
+message TranslateTextResponse {
+  repeated Translation translations = 1;
+}
+
+message Translation {
+  string translated_text = 1;
+  string model = 2;
+  string detected_language_code = 4;  
+}
