@@ -25,13 +25,16 @@ func cmd() *cobra.Command {
 	var parent string
 	var credentials string
 	var address string
+	var token string
 	cmd := &cobra.Command{
 		Use:   "translate TEXT",
 		Short: "Translate with the Cloud Translation API",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			client := sidecar.NewClient(address)
-			if credentials != "" {
+			if token != "" {
+				client.Header.Set("authorization", "Bearer "+token)
+			} else if credentials != "" {
 				token, err := accessToken(cmd.Context(), credentials)
 				if err != nil {
 					return err
@@ -64,6 +67,7 @@ func cmd() *cobra.Command {
 	cmd.Flags().StringVarP(&parent, "parent", "p", "", "parent project (format: projects/PROJECTID)")
 	cmd.Flags().StringVar(&credentials, "credentials", "", "service account credentials")
 	cmd.Flags().StringVarP(&address, "address", "a", "translate.googleapis.com:443", "service address")
+	cmd.Flags().StringVar(&token, "token", "", "auth token")
 	return cmd
 }
 
