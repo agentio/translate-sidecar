@@ -10,6 +10,12 @@ test:
 
 APIS=$(shell find proto -name "*.proto")
 
+descriptor:
+	protoc ${APIS} \
+	--proto_path='proto' \
+	--include_imports \
+	--descriptor_set_out=descriptor.pb
+
 rpc:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	mkdir -p genproto
