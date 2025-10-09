@@ -4,6 +4,8 @@ github.com/agentio/sidecar v0.1.10 h1:5X/Ch2dcB8wJK1YmBT24EKaLZ0IxdrPCc7IA2QWOdq
 github.com/agentio/sidecar v0.1.10/go.mod h1:MnIzfRzgqORTAze1wNyITyC2flT1cVDeQGI9baUul/4=
 github.com/agentio/sidecar v0.1.11 h1:ATq6fCCWvrphTe96uJ6rKqUC63dXA+MQ7u857rXAfY0=
 github.com/agentio/sidecar v0.1.11/go.mod h1:MnIzfRzgqORTAze1wNyITyC2flT1cVDeQGI9baUul/4=
+github.com/agentio/sidecar v0.1.12 h1:gH91F1dLjkp6hrawa9E5e6auPtJBIqMUDO/5pnoZCkc=
+github.com/agentio/sidecar v0.1.12/go.mod h1:MnIzfRzgqORTAze1wNyITyC2flT1cVDeQGI9baUul/4=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=

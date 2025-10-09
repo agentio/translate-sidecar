@@ -42,6 +42,7 @@ func cmd() *cobra.Command {
 				client.Header.Set("authorization", "Bearer "+token)
 			}
 			response, err := sidecar.CallUnary[translatepb.TranslateTextRequest, translatepb.TranslateTextResponse](
+				cmd.Context(),
 				client,
 				"/google.cloud.translation.v3.TranslationService/TranslateText",
 				sidecar.NewRequest(
