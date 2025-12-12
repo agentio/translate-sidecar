@@ -31,7 +31,7 @@ func cmd() *cobra.Command {
 		Short: "Translate with the Cloud Translation API",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			client := sidecar.NewClient(address)
+			client := sidecar.NewClient(sidecar.ClientOptions{Address:address})
 			if token != "" {
 				client.Header.Set("authorization", "Bearer "+token)
 			} else if credentials != "" {
