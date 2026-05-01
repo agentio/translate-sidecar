@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/agentio/porter"
 	"github.com/agentio/sidecar"
 	"github.com/agentio/translate-sidecar/genproto/translatepb"
 	"github.com/spf13/cobra"
@@ -31,7 +32,14 @@ func cmd() *cobra.Command {
 		Short: "Translate with the Cloud Translation API",
 		Args:  cobra.MinimumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			client := sidecar.NewClient(sidecar.ClientOptions{Address:address})
+			service, err := porter.ResolveService(cmd.Context(), "calling:google-translate")
+			if err == nil {
+				address = fmt.Sprintf("%s:%d", service.Address, service.Port)
+			}
+			if address == "" {
+				address = "translate.googleapis.com:443"
+			}
+			client := sidecar.NewClient(sidecar.ClientOptions{Address: address})
 			if token != "" {
 				client.Header.Set("authorization", "Bearer "+token)
 			} else if credentials != "" {
@@ -67,7 +75,7 @@ func cmd() *cobra.Command {
 	cmd.Flags().StringVar(&target, "target", "es-mx", "target language")
 	cmd.Flags().StringVarP(&parent, "parent", "p", "", "parent project (format: projects/PROJECTID)")
 	cmd.Flags().StringVar(&credentials, "credentials", "", "service account credentials")
-	cmd.Flags().StringVarP(&address, "address", "a", "translate.googleapis.com:443", "service address")
+	cmd.Flags().StringVarP(&address, "address", "a", "", "service address")
 	cmd.Flags().StringVar(&token, "token", "", "auth token")
 	return cmd
 }
