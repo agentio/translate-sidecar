@@ -34,7 +34,11 @@ func cmd() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			service, err := porter.ResolveService(cmd.Context(), "calling:google-translate")
 			if err == nil {
-				address = fmt.Sprintf("%s:%d", service.Address, service.Port)
+				if service.Socket != "" {
+					address = fmt.Sprintf("unix:%s", service.Socket)
+				} else {
+					address = fmt.Sprintf("%s:%d", service.Address, service.Port)
+				}
 			}
 			if address == "" {
 				address = "translate.googleapis.com:443"
